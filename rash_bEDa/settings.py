@@ -9,6 +9,11 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import firebase_admin
+from firebase_admin import credentials
+
+cred = credentials.Certificate("C:/Users/venuk/Downloads/rash-beda-d8cde-firebase-adminsdk-4zvba-d71cd5ec56")
+firebase_admin.initialize_app(cred)
 
 from pathlib import Path
 
@@ -29,6 +34,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+AUTHENTICATION_BACKENDS = [
+    'rash-beda.auth_backends.firebase_auth.FirebaseAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
